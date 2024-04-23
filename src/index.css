@@ -7,3 +7,14 @@
   margin: 0;
   overflow-x: hidden;
 }
+.page{
+  width: 100vw;
+  min-height: 100vh;
+  height: auto;
+}
+
+.displayFlex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
