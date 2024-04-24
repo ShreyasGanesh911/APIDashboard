@@ -20,7 +20,7 @@ export default function Home() {
             <div className=' w-3/4 px-14 my-5'>
                 <h1 className='text-4xl py-3'>Welcome back <span className='text-yellow-300 font-mono '>Shreyas</span></h1>
             </div>
-           <div className='flex justify-around items-center w-3/4 py-10  mt-6'>
+           <div className='flex justify-around items-center w-3/4 py-8  '>
            {<Card title='Requests' data={89}/>}
            {<Card title='Latency' data={92}/>}
            {<Card title='days remaining' data={30}/>}
