@@ -32,6 +32,7 @@ type Data = {
 }
 export default function LineChart() {
   const navigate = useNavigate()
+  const [loading,setLoading] = useState(true)
   const [label,setLabel] = useState<String[]>()
   const [reqData,setReqData] = useState<Number[]>()
   const [result,setResult] = useState(true)
@@ -51,8 +52,11 @@ export default function LineChart() {
 
     const responce:[Responce] = data.responce || []
     console.log(!responce.length)
-    if(!responce.length)
-        return setResult(false)
+    if(!responce.length){
+      setLoading(false)
+      return setResult(false)
+    }
+        
     responce.map((e)=>{
       return(
         dates.push(e.date) &&
@@ -62,8 +66,7 @@ export default function LineChart() {
     })
     setLabel(dates)
     setReqData(reqs)
-    console.log(dates,reqs)
-    console.log(data)
+    setLoading(false)
   }
   useEffect(()=>{
     getData()
@@ -115,11 +118,15 @@ export default function LineChart() {
     }
   return (
     <>
-      <div className='w-full h-full displayFlex overflow-hidden p-2 text-black'>
+      {!loading ? <>
+        <div className='w-full h-full displayFlex overflow-hidden p-2 text-black'>
       {result ? <Line data={data} options={options} />:<>
         <p className='text-gray-400 text-2xl py-2'>No requests have been made using this account </p>
       </>}
       </div>
+      </> :
+      <div className='w-full h-full displayFlex overflow-hidden p-2 text-black animate-pulse dark:bg-gray-900'></div>
+      }
     </>
   )
 }

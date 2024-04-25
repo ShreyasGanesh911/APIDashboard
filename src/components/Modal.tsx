@@ -3,6 +3,7 @@ import TableChild from './TableChild'
 import Link from './Link'
 import CreateAPI from './CreateAPI'
 import { useNavigate } from 'react-router-dom'
+import LoadingTable from './Loading/LoadingTable'
 type Keys = {
   active :Boolean,
   _id:String,
@@ -16,6 +17,7 @@ type Props = {
 
 export default function Modal({setShow,APIkey}:Props) {
   const [update,setUpdate] = useState(false)
+  const [loading,setLoading] = useState(true)
   const [apikeys,setApiKeys] = useState<[Keys]>([{_id:"",active:true,APIkey:0,requests:0}])
   const navigate = useNavigate()
   const getData = async()=>{
@@ -33,6 +35,7 @@ export default function Modal({setShow,APIkey}:Props) {
     const {keys} = data.responce
     console.log("keys",keys)
     setApiKeys(keys)
+    setLoading(false)
 
   }
 
@@ -53,7 +56,9 @@ export default function Modal({setShow,APIkey}:Props) {
             </button>
             </div>
         <div className={`${update} pt-36 h-auto  w-3/4 bg-black  flex justify-center items-center py-5  flex-col absolute rounded pb-12`}>
-          {
+        {
+            loading ? <LoadingTable/>:<>
+                      {
             apikeys.length >0 ?
             <>
                     <table className="w-11/12 divide-y bg-neutral-900 dark:divide-neutral-700 border h-auto  text-white">
@@ -82,8 +87,15 @@ export default function Modal({setShow,APIkey}:Props) {
                 <p className='text-white p-3'>Try creating one to get started</p>
             </div>
           }
-        <CreateAPI setUpdate ={setUpdate} update={update}/>
-            <Link/>
+            </>
+        }
+        { 
+          loading ? <LoadingTable/> :<CreateAPI setUpdate ={setUpdate} update={update}/>
+        }
+            
+            { 
+          loading ? <LoadingTable/> :<Link/>
+        }
 
         </div>            
       
