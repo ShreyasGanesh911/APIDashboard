@@ -9,6 +9,8 @@ import {
     Tooltip,
     Legend,
   } from 'chart.js'
+import { useEffect, useState } from 'react';
+import {useNavigate } from 'react-router-dom';
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -19,30 +21,104 @@ import {
     Legend
   )
 
-
+type Responce = {
+  date:String,
+  requests:Number
+}
+type Data = {
+  message:String,
+  responce : [Responce],
+  success: Boolean
+}
 export default function LineChart() {
+  const navigate = useNavigate()
+  const [label,setLabel] = useState<String[]>()
+  const [reqData,setReqData] = useState<Number[]>()
+  const [result,setResult] = useState(true)
+  const getData = async()=>{
+    const response = await fetch('http://localhost:4000/user/allRequests', {
+      method: "GET", 
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if(response.status === 401)
+      return navigate('/')
+    const dates:Array<String> = []
+    const reqs:Array<Number> = []
+    const data:Data = await response.json()
+
+    const responce:[Responce] = data.responce || []
+    console.log(!responce.length)
+    if(!responce.length)
+        return setResult(false)
+    responce.map((e)=>{
+      return(
+        dates.push(e.date) &&
+        reqs.push(e.requests)
+      )
+        
+    })
+    setLabel(dates)
+    setReqData(reqs)
+    console.log(dates,reqs)
+    console.log(data)
+  }
+  useEffect(()=>{
+    getData()
+  },[])
     const data = {
-        labels: [
-          '10/04/2018', '10/05/2018', 
-          '10/06/2018', '10/07/2018', 
-          '10/08/2018', '10/09/2018', 
-          '10/10/2018', '10/11/2018', 
-          '10/12/2018', '10/13/2018', 
-          '10/14/2018', '10/15/2018'
-        ],
+        labels: label,
         datasets: [
           {
-            label: 'Temperature',
-            data: [22,19,27,23,22,24,17,25,23,24,20,19],
-            fill: false,          // Don't fill area under the line
-            borderColor: 'green'  // Line color
+            label: 'Requests',
+            data: reqData,
+            fill: true,          
+            borderColor: 'cyan' ,
+            backgroundColor:"blue",
+            pointRadius:5,
+            tension:0.3,
+            borderWidth:2
+            
           }
-        ]
-      };
+        ],
+        
+      }
+
+    const options = {
+      plugins: {
+        title: {
+          display: true,
+          text: "Requests made per date"
+        },
+        legend: {
+          display: true
+        },
+
+      },
+      scales:{
+        y: {
+          ticks: {
+            color: 'yellow',
+            stepSize:2,
+          }    
+        },
+        x:{
+          ticks: {
+            color: 'yellow'
+          } 
+        }
+      }
+      
+
+    }
   return (
     <>
-      <div className='w-full h-full displayFlex'>
-      <Line data={data}/>
+      <div className='w-full h-full displayFlex overflow-hidden p-2 text-black'>
+      {result ? <Line data={data} options={options} />:<>
+        <p className='text-gray-400 text-2xl py-2'>No requests have been made using this account </p>
+      </>}
       </div>
     </>
   )

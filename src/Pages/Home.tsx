@@ -1,60 +1,60 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Card from '../components/Card'
-import APIList from '../components/APIList'
 import LineChart from '../components/LineChart'
 import Modal from '../components/Modal'
-
+import { useNavigate } from 'react-router-dom'
+import APIStats from '../components/APIStats'
+type Keys = {
+    active :Boolean,
+    _id:String,
+    APIkey : Number,
+    requests:Number
+}
 export default function Home() {
+    const navigate = useNavigate()
+    const [keys,setKeys] = useState<[Keys]>([{_id:"",active:true,APIkey:0,requests:0}])
     const [show,setShow] = useState(false)
-    const handleClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
-        e.preventDefault()
-        console.log("clicked")
-        setShow(true)
-    }
+    const [name,setName] = useState('')
+    const [credentials,setCredentials] = useState({requests:0,remaining:0,start:"",endTime:"",totalKeys:0})
 
+    const getData = async()=>{
+        const response = await fetch('http://localhost:4000/user/about', {
+        method: "GET", 
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      if(response.status === 401)
+        return navigate('/')
+      const data = await response.json()
+      const {responce} = data
+      console.log(responce)
+      setName(data.responce.name || '')
+      setCredentials({requests:responce.requests,remaining:responce.remaining,start:responce.start,endTime:responce.end,totalKeys:responce.totalKeys})
+      setKeys(data.responce.keys)
+    }
+    useEffect(()=>{
+        getData()
+    },[setShow,show])
   return (
     <>
     
      <section className='page bg-black py-24 text-white flex justify-start items-center flex-col'>
-        {show ? <Modal setShow={setShow}/> :<></>}
+        {show ? <Modal setShow={setShow} APIkey={keys}/> :<></>}
             <div className=' w-3/4 px-14 my-5'>
-                <h1 className='text-4xl py-3'>Welcome back <span className='text-yellow-300 font-mono '>Shreyas</span></h1>
+                <h1 className='text-4xl py-3'>Welcome back <span className='text-yellow-300 font-mono capitalize'>{name}</span></h1>
             </div>
            <div className='flex justify-around items-center w-3/4 py-8  '>
-           {<Card title='Requests' data={89}/>}
-           {<Card title='Latency' data={92}/>}
-           {<Card title='days remaining' data={30}/>}
+           {<Card title='Requests' data={credentials.requests}/>}
+           {<Card title='API keys' data={credentials.totalKeys}/>}
+           {<Card title='days remaining' data={credentials.remaining}/>}
            </div>
            <div className='flex justify-around items-center w-3/4 py-10  '>
-           <div className='text-white  rounded-2xl  w-7/12  bg-neutral-900' style={{height:"40vh"}}>
+           <div className='text-white  rounded-lg  w-7/12 bg-neutral-900 overflow-hidden' style={{height:"40vh"}}>
             <LineChart/>
            </div>
-           <div className='text-white  rounded-2xl w-1/4 h-64 ml-5 bg-neutral-900 ' style={{height:"40vh"}}>
-            <div className='relative '>
-            
-            <h1 className='text-center text-3xl py-2'>API Keys</h1>
-            <button className="bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-1 px-2 rounded relative float-right bottom-10 mx-2" onClick={handleClick}>
-                <div className='border w-5 my-1 border-black'></div>
-                <div className='border w-5 border-black'></div>
-                <div className='border w-5 my-1 border-black'></div>
-            </button>
-            </div>
-            
-
-           <div className='w-full bg-black  mb-2 text-center text-white flex items-center justify-around' >
-                <p className='text-xl'>Key</p>
-                <p className='text-xl'>Status</p> 
-           </div>
-            <APIList/>
-            <APIList/>
-            <APIList/>
-            <APIList/>
-            <APIList/>
-            <APIList/>
-            <APIList/>
-            <APIList/>
-            <APIList/>
-           </div>
+          <APIStats setShow={setShow} Timeend={credentials.endTime} start = {credentials.start} />
            </div>
            
         </section> 
