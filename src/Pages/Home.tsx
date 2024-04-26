@@ -4,6 +4,7 @@ import LineChart from '../components/LineChart'
 import Modal from '../components/Modal'
 import { useNavigate } from 'react-router-dom'
 import APIStats from '../components/APIStats'
+import LogoutButton from '../components/LogoutButton'
 type Keys = {
     active :Boolean,
     _id:String,
@@ -44,10 +45,15 @@ export default function Home() {
     
      <section className='page bg-black py-24 text-white flex justify-start items-center flex-col'>
         {show ? <Modal setShow={setShow} APIkey={keys}/> :<></>}
-            <div className=' w-3/4 px-14 my-5'>
-                {loading ?<div className='w-2/4 h-32 animate-pulse bg-neutral-900'></div>:<h1 className='text-4xl py-3'>Welcome back <span className='text-yellow-300 font-mono capitalize'>{name}</span></h1>}
+            <div className=' w-3/4 px-14 my-2'>
+           <LogoutButton/>
+                {loading ?<div className='w-2/4 h-32 animate-pulse bg-neutral-900'></div>:<h1 className='text-4xl py-3'>Welcome back <span className='text-yellow-300 font-mono capitalize'>{name}</span>
+                  
+                </h1>
+                }
+              
             </div>
-            {
+            { 
               loading ? <div className='w-4/5 animate-pulse bg-neutral-900 h-60 my-5'>
 
               </div>:
