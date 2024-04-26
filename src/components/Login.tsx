@@ -31,23 +31,28 @@ export default function Login({form,setForm}:Props) {
       if(password === "")
         return toastWarning("Can't leave password empty")
       
-      const response = await fetch(`${point}/user/login`, {
-        method: "POST", 
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({password,email})
-      })
-      const data:Data = await response.json()
-      if(data.success)
-        return navigate('/dashboard')
-      
-      else if( response.status === 401 || 404  )
-          return toastWarning(data.message)
-       
-      else 
-      return toastError("Internal Server error")
+      try{
+        const response = await fetch(`${point}/user/login`, {
+          method: "POST", 
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({password,email})
+        })
+        const data:Data = await response.json()
+        if(data.success)
+          return navigate('/dashboard')
+        
+        else if( response.status === 401 || 404  )
+            return toastWarning(data.message)
+         
+        else 
+        return toastError("Internal Server error")
+      }catch(err){
+        console.log(err)
+        toastError("Internal Server error")
+      }
 
     }
   return (
