@@ -32,7 +32,7 @@ export default function Login({form,setForm}:Props) {
         return toastWarning("Can't leave password empty")
       
       try{
-        const response = await fetch(`${point}/user/login`, {
+        const response = await fetch(`/user/login`, {
           method: "POST", 
           credentials: "include",
           headers: {
