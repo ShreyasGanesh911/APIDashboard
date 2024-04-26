@@ -79,7 +79,7 @@ export default function Modal({setShow,APIkey}:Props) {
           </tbody>
         </table>
             </>:
-            <div className={`${update}  h-auto  w-11/12 bg-neutral-900  flex justify-center items-center py-5  flex-col  py-12`}>
+            <div className={`${update}  h-auto  w-11/12 bg-neutral-900  flex justify-center items-center   flex-col  py-12`}>
                 <p className='text-gray-400 text-6xl p-2 overflow-hidden'>No API Keys </p>
                 <p className='text-white p-3'>Try creating one to get started</p>
             </div>

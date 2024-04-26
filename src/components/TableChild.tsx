@@ -23,6 +23,7 @@ export default function TableChild({name,status,req,APIKey,setUpdate,update}:Pro
   }
   const handleConfirmDelete = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     e.preventDefault()
+    setConfirm(false)
     const response = await fetch('http://localhost:4000/user/deleteKey', {
       method: "DELETE", 
       credentials: "include",
