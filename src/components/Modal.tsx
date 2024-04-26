@@ -4,7 +4,7 @@ import Link from './Link'
 import CreateAPI from './CreateAPI'
 import { useNavigate } from 'react-router-dom'
 import LoadingTable from './Loading/LoadingTable'
-const point = 'http://localhost:4000'
+const point = 'https://apidashboard-backend.onrender.com'
 type Keys = {
   active :Boolean,
   _id:String,

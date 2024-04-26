@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer} from 'react-toastify';
 import {toastWarning,toastError } from '../Toast';
-const point = 'http://localhost:4000'
+const point = 'https://apidashboard-backend.onrender.com'
 type Props={
     form:boolean,
     setForm :React.Dispatch<React.SetStateAction<boolean>>

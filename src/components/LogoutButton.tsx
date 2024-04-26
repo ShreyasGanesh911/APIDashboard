@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-const point = 'http://localhost:4000'
+const point = 'https://apidashboard-backend.onrender.com'
 export default function LogoutButton() {
     const navigate = useNavigate()
     const handleClick = async(e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{

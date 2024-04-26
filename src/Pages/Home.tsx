@@ -18,7 +18,7 @@ export default function Home() {
     const [name,setName] = useState('')
     const [loading , setLoading] = useState(true)
     const [credentials,setCredentials] = useState({requests:0,remaining:0,start:"",endTime:"",totalKeys:0})
-    const point = 'http://localhost:4000'
+    const point = 'https://apidashboard-backend.onrender.com'
     const getData = async()=>{
         const response = await fetch(`${point}/user/about`, {
         method: "GET", 

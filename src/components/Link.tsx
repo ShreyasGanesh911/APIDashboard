@@ -1,5 +1,5 @@
 import React from 'react'
-const point = 'http://localhost:4000'
+const point = 'https://apidashboard-backend.onrender.com'
 export default function Link() {
     const link = `${point}/user/make?authKey=[ Your key here  ]`
     const handleCopyText = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{

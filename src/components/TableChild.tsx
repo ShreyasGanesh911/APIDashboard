@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-const point = 'http://localhost:4000'
+const point = 'https://apidashboard-backend.onrender.com'
 type Props = {
   name:String ,
   req:Number,
@@ -11,6 +11,7 @@ type Props = {
 }
 export default function TableChild({name,status,req,APIKey,setUpdate,update}:Props) {
   const navigate = useNavigate()
+  const [wait,setWait] = useState(false)
   const [confirm,setConfirm] = useState(false)
   const handleCopyText = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     e.preventDefault()
@@ -23,6 +24,7 @@ export default function TableChild({name,status,req,APIKey,setUpdate,update}:Pro
     
   }
   const handleConfirmDelete = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+    setWait(true)
     e.preventDefault()
     setConfirm(false)
     const response = await fetch(`${point}/user/deleteKey`, {
@@ -40,7 +42,7 @@ export default function TableChild({name,status,req,APIKey,setUpdate,update}:Pro
   }
   return (
     <>
-       <tr>
+       <tr className={`${wait?'cursor-wait':" "}`}>
               <td className="px-6 py-2 whitespace-nowrap text-sm font-medium col-span-2">{name}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-start text-green-500">{status?"Active":"Inactive"}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm ">{req.toString()}</td>

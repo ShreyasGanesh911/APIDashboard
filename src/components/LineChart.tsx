@@ -1,5 +1,5 @@
 import { Line } from 'react-chartjs-2'
-const point = 'http://localhost:4000'
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -21,7 +21,7 @@ import {useNavigate } from 'react-router-dom';
     Tooltip,
     Legend
   )
-
+  const point = 'https://apidashboard-backend.onrender.com'
 type Responce = {
   date:String,
   requests:Number
