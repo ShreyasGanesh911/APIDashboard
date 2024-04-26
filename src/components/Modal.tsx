@@ -31,9 +31,7 @@ export default function Modal({setShow,APIkey}:Props) {
     if(response.status === 401)
       return navigate('/')
     const data = await response.json()
-    console.log(data)
     const {keys} = data.responce
-    console.log("keys",keys)
     setApiKeys(keys)
     setLoading(false)
 
@@ -42,7 +40,6 @@ export default function Modal({setShow,APIkey}:Props) {
   
   useEffect(()=>{
     getData()
-    console.log("hell")
   },[setUpdate,update])
   return (
     <>

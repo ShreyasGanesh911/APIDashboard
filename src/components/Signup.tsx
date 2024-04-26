@@ -21,7 +21,7 @@ export default function Signup({form,setForm}:Props) {
                <label htmlFor="email" className=' text-white tracking-wide text-lg ' >Name:</label>
                </div>
                 <div className='w-8/12'>
-                <input className='border border-slate-400 w-full p-3 my-3 rounded tracking-wide outline-slate-400 text-black' placeholder='Your Name' type="text" />
+                <input className='border disabled border-slate-400 w-full p-3 my-3 rounded tracking-wide outline-slate-400 text-black' disabled={true} placeholder='Your Name' type="text" />
                 </div>
               </div>
               <div className='flex justify-center items-start flex-col'>
@@ -29,7 +29,7 @@ export default function Signup({form,setForm}:Props) {
                <label htmlFor="email" className=' text-white tracking-wide text-lg ' >Email:</label>
                </div>
                 <div className='w-8/12'>
-                <input className='border border-slate-400 w-full p-3 my-3 rounded tracking-wide outline-slate-400 text-black' placeholder='Your Email Address' type="email" />
+                <input disabled={true} className='border disabled: border-slate-400 w-full p-3 my-3 rounded tracking-wide outline-slate-400 text-black' placeholder='Your Email Address' type="email" />
                 </div>
               </div>
 
@@ -39,14 +39,14 @@ export default function Signup({form,setForm}:Props) {
                <label htmlFor="password" className=' text-white tracking-wide text-lg ' >Password:</label>
                </div>
                 <div className='w-3/4 flex items-center'>
-                <input className='border border-slate-400 w-full p-3 my-3 rounded text-black outline-slate-400 tracking-wide' placeholder='Enter Password' type={show} />
+                <input disabled={true} className='border border-slate-400 w-full p-3 my-3 rounded text-black outline-slate-400 tracking-wide' placeholder='Enter Password' type={show} />
                 <button className="border border-slate-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label relative right-14" onClick={handlePasswordVisibility} >{visibility}</button>
                 </div>
               </div>
 
         
               <div className='flex flex-row-reverse w-full my-3 px-3'>
-                <button className='bg-slate-700 hover:bg-slate-950 text-white font-bold py-2 px-4 rounded'>Register</button>
+                <button className='bg-slate-700 hover:bg-slate-950 text-white font-bold py-2 px-4 rounded' disabled={true}>Register</button>
               </div>
 
         </form>   

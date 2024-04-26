@@ -23,7 +23,6 @@ export default function CreateAPI({setUpdate,update}:Props) {
         },
         body: JSON.stringify({tag})
       })
-      console.log(response)
       const data:Data = await response.json()
       if(data.success){
         setMessage("New API key added")
@@ -35,8 +34,6 @@ export default function CreateAPI({setUpdate,update}:Props) {
       else 
         return setMessage("Internal server error")
       update ? setUpdate(false):setUpdate(true)
-       
-      console.log(data)
     }
   return (
     <>

@@ -51,7 +51,6 @@ export default function LineChart() {
     const data:Data = await response.json()
 
     const responce:[Responce] = data.responce || []
-    console.log(!responce.length)
     if(!responce.length){
       setLoading(false)
       return setResult(false)

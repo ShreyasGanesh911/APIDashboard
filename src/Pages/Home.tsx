@@ -31,7 +31,6 @@ export default function Home() {
         return navigate('/')
       const data = await response.json()
       const {responce} = data
-      console.log(responce)
       setName(data.responce.name || '')
       setCredentials({requests:responce.requests,remaining:responce.remaining,start:responce.start,endTime:responce.end,totalKeys:responce.totalKeys})
       setKeys(data.responce.keys)

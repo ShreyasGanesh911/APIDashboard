@@ -38,7 +38,6 @@ export default function Login({form,setForm}:Props) {
         },
         body: JSON.stringify({password,email})
       })
-      console.log(response)
       const data:Data = await response.json()
       if(data.success)
         return navigate('/dashboard')
@@ -54,7 +53,7 @@ export default function Login({form,setForm}:Props) {
     <>
       <form className=' px-14  bg-neutral-900 rounded-2xl w-3/4 h-4/5  flex flex-col justify-center' onSubmit={handleSubmit}>
               <h1 className=' text-4xl overflow-hidden font-semibold my-3'>Welcome back !</h1>
-              <p className='py-3'>Don't have an account!? <span className='text-red-500 underline'>< button className='text-lg underline' onClick={()=>{setForm(false)}}>Create Account</button></span>, takes less than a minute </p>
+              <p className='py-3'>Don't have an account!? <span className='text-red-500 underline'>< button className='text-lg underline' onClick={()=>{setForm(false)}}>Create Account</button></span></p>
               <div className='flex justify-center items-start flex-col'>
                <div >
                <label htmlFor="email" className=' text-white tracking-wide text-lg ' >Email:</label>
