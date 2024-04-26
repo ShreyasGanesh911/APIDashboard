@@ -4,6 +4,7 @@ import Link from './Link'
 import CreateAPI from './CreateAPI'
 import { useNavigate } from 'react-router-dom'
 import LoadingTable from './Loading/LoadingTable'
+const point = 'http://localhost:4000'
 type Keys = {
   active :Boolean,
   _id:String,
@@ -21,7 +22,7 @@ export default function Modal({setShow,APIkey}:Props) {
   const [apikeys,setApiKeys] = useState<[Keys]>([{_id:"",active:true,APIkey:0,requests:0}])
   const navigate = useNavigate()
   const getData = async()=>{
-    const response = await fetch('http://localhost:4000/user/about', {
+    const response = await fetch(`${point}/user/about`, {
       method: "GET", 
       credentials: "include",
       headers: {

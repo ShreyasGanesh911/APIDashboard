@@ -1,7 +1,7 @@
 import React from 'react'
-
+const point = 'http://localhost:4000'
 export default function Link() {
-    const link = 'http://localhost:4000/user/make?authKey=[ Your key here  ]'
+    const link = `${point}/user/make?authKey=[ Your key here  ]`
     const handleCopyText = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
         e.preventDefault()
         await navigator.clipboard.writeText(link)

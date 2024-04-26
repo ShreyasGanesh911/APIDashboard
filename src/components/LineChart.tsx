@@ -1,4 +1,5 @@
 import { Line } from 'react-chartjs-2'
+const point = 'http://localhost:4000'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -37,7 +38,7 @@ export default function LineChart() {
   const [reqData,setReqData] = useState<Number[]>()
   const [result,setResult] = useState(true)
   const getData = async()=>{
-    const response = await fetch('http://localhost:4000/user/allRequests', {
+    const response = await fetch(`${point}/user/allRequests`, {
       method: "GET", 
       credentials: "include",
       headers: {

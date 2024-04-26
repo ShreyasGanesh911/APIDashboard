@@ -1,11 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
+const point = 'http://localhost:4000'
 export default function LogoutButton() {
     const navigate = useNavigate()
     const handleClick = async(e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
         e.preventDefault()
-        const response = await fetch('http://localhost:4000/user/logout', {
+        const response = await fetch(`${point}/user/logout`, {
             method: "GET", 
             credentials: "include",
             headers: {

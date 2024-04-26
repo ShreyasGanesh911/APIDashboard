@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+const point = 'http://localhost:4000'
 type Data = {
     success:Boolean,
     message:String
@@ -15,7 +16,7 @@ export default function CreateAPI({setUpdate,update}:Props) {
         e.preventDefault()
         if(tag === '')  
             return setMessage("Please enter a name ")
-        const response = await fetch('http://localhost:4000/user/createKey', {
+        const response = await fetch(`${point}/user/createKey`, {
         method: "POST", 
         credentials: "include",
         headers: {

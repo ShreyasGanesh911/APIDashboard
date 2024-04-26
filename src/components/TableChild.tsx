@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+const point = 'http://localhost:4000'
 type Props = {
   name:String ,
   req:Number,
@@ -24,7 +25,7 @@ export default function TableChild({name,status,req,APIKey,setUpdate,update}:Pro
   const handleConfirmDelete = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     e.preventDefault()
     setConfirm(false)
-    const response = await fetch('http://localhost:4000/user/deleteKey', {
+    const response = await fetch(`${point}/user/deleteKey`, {
       method: "DELETE", 
       credentials: "include",
       headers: {

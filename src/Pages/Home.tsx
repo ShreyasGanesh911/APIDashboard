@@ -18,9 +18,9 @@ export default function Home() {
     const [name,setName] = useState('')
     const [loading , setLoading] = useState(true)
     const [credentials,setCredentials] = useState({requests:0,remaining:0,start:"",endTime:"",totalKeys:0})
-
+    const point = 'http://localhost:4000'
     const getData = async()=>{
-        const response = await fetch('http://localhost:4000/user/about', {
+        const response = await fetch(`${point}/user/about`, {
         method: "GET", 
         credentials: "include",
         headers: {

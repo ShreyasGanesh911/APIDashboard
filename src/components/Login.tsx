@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer} from 'react-toastify';
 import {toastWarning,toastError } from '../Toast';
+const point = 'http://localhost:4000'
 type Props={
     form:boolean,
     setForm :React.Dispatch<React.SetStateAction<boolean>>
@@ -30,7 +31,7 @@ export default function Login({form,setForm}:Props) {
       if(password === "")
         return toastWarning("Can't leave password empty")
       
-      const response = await fetch('http://localhost:4000/user/login', {
+      const response = await fetch(`${point}/user/login`, {
         method: "POST", 
         credentials: "include",
         headers: {
