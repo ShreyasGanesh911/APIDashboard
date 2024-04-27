@@ -14,8 +14,8 @@ type Data = {
 export default function Login({form,setForm}:Props) {
     const navigate = useNavigate()
     const [show,setShow] = useState('password')
-    const [password,setPassword] = useState('')
-    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('123456789')
+    const [email,setEmail] = useState('trainapiisnow@gmail.com')
     const [visibility,setVisibility] = useState('show')
 
     const handlePasswordVisibility = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
