@@ -3,8 +3,13 @@ Easy-to-use dashboard for monitoring requests and API keys, Built using MERN
 <hr/>
 <br/>
 ## Dashboard
+<br/>
+
 ![Dashboard](./Assets/Dashboard.png)
 <br/>
 ## Modal
-![Modal](./Assets/API management modal.png)
+<br/>
+
+![Modal](./Assets/Modal.png)
+
 
