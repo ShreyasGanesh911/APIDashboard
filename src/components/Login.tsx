@@ -17,6 +17,7 @@ export default function Login({form,setForm}:Props) {
     const [password,setPassword] = useState('123456789')
     const [email,setEmail] = useState('trainapiisnow@gmail.com')
     const [visibility,setVisibility] = useState('show')
+    const [loading,setLoading] = useState(false)
 
     const handlePasswordVisibility = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
         e.preventDefault()
@@ -30,7 +31,7 @@ export default function Login({form,setForm}:Props) {
         return toastWarning("Can't leave email empty")
       if(password === "")
         return toastWarning("Can't leave password empty")
-      
+      setLoading(true)
       try{
         const response = await fetch(`${point}/user/login`, {
           method: "POST", 
@@ -41,11 +42,17 @@ export default function Login({form,setForm}:Props) {
           body: JSON.stringify({password,email})
         })
         const data:Data = await response.json()
-        if(data.success)
+        if(data.success){
+         
           return navigate('/dashboard')
+        }
+          
         
-        else if( response.status === 401 || 404  )
-            return toastWarning(data.message)
+        else if( response.status === 401 || 404  ){
+          setTimeout(()=>{setLoading(false)},500)
+          return toastWarning(data.message)
+        }
+            
          
         else 
         return toastError("Internal Server error")
@@ -57,7 +64,7 @@ export default function Login({form,setForm}:Props) {
     }
   return (
     <>
-      <form className=' px-14  bg-neutral-900 rounded-2xl w-3/4 h-4/5  flex flex-col justify-center' onSubmit={handleSubmit}>
+      <form className={` px-14  bg-neutral-900 rounded-2xl w-3/4 h-4/5  flex flex-col justify-center ${loading?'cursor-wait':''}`} onSubmit={handleSubmit}>
               <h1 className=' text-4xl overflow-hidden font-semibold my-3 overflow-y-hidden'>Welcome back !</h1>
               <p className='py-3'>Don't have an account!? <span className='text-red-500 underline'>< button className='text-lg underline' onClick={()=>{setForm(false)}}>Create Account</button></span></p>
               <div className='flex justify-center items-start flex-col'>
